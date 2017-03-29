@@ -16,6 +16,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //activar flecha ir atras
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+
+        //forzar y cargar icono en el action bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_rook);
+
         btn = (Button) findViewById(R.id.buttonMain);
 
         btn.setOnClickListener(new View.OnClickListener(){

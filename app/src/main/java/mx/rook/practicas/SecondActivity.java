@@ -19,6 +19,13 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        //activar flecha ir atras
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+
+        //forzar y cargar icono en el action bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_rook);
+
         textView = (TextView) findViewById(R.id.textViewMain);
         btnCompartir = (Button) findViewById(R.id.buttonCompartir);
 

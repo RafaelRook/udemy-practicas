@@ -1,6 +1,7 @@
 package mx.rook.practicas;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -24,11 +25,19 @@ public class ThirdActivity extends AppCompatActivity {
     private ImageButton imgBtnCamera;
 
     private final int PHONE_CALL_CODE = 100;
+    private final int PICTURE_FROM_CAMERA = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
+
+        //activar flecha ir atras
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+
+        //forzar y cargar icono en el action bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_rook);
 
         editTextPhone = (EditText) findViewById(R.id.editTextPhone);
         editTextWeb = (EditText) findViewById(R.id.editTextWeb);
@@ -112,21 +121,52 @@ public class ThirdActivity extends AppCompatActivity {
                     //email rapido
                     Intent intentMailTo = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"+email));
                     //email completo
-                    Intent intentMail = new Intent(Intent.ACTION_VIEW, Uri.parse(email));
-                    intentMail.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+                    Intent intentMail = new Intent(Intent.ACTION_SEND, Uri.parse(email));
+                    //intentMail.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
                     intentMail.setType("plain/text");
                     intentMail.putExtra(Intent.EXTRA_SUBJECT, "Mail's title");
                     intentMail.putExtra(Intent.EXTRA_TEXT, "Hi there, I love MyForm app, but...");
                     intentMail.putExtra(Intent.EXTRA_EMAIL, new String[]{"fernando@gmail.com", "antonio@gmail.com"});
+                    startActivity(Intent.createChooser(intentMail, "Elige cliente de correo"));
 
                     //telefono 2 sin permisos requeridos
                     Intent intentPhone = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:6672670049"));
 
 
-                    startActivity(intentPhone);
+
+                    //startActivity(intentMail);
                 }
             }
         });
+
+        imgBtnCamera.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //abrir camara
+                Intent intentCamera = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivityForResult(intentCamera, PICTURE_FROM_CAMERA);
+            }
+        }
+        );
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode) {
+            case PICTURE_FROM_CAMERA:
+                if (resultCode == Activity.RESULT_OK){
+                    String result = data.toUri(0);
+                    Toast.makeText(this, "Result:"+result, Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(this, "Hubo un error con la fotografia", Toast.LENGTH_LONG).show();
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+
+        }
 
     }
 
