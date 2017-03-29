@@ -24,6 +24,7 @@ public class SecondActivity extends AppCompatActivity {
 
         //forzar y cargar icono en el action bar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_rook);
 
         textView = (TextView) findViewById(R.id.textViewMain);

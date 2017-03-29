@@ -37,6 +37,7 @@ public class ThirdActivity extends AppCompatActivity {
 
         //forzar y cargar icono en el action bar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_rook);
 
         editTextPhone = (EditText) findViewById(R.id.editTextPhone);
