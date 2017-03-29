@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         //forzar y cargar icono en el action bar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setIcon(R.mipmap.ic_rook);
 
         btn = (Button) findViewById(R.id.buttonMain);
